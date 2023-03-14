@@ -131,7 +131,7 @@ header {
 }
 
 .footer-logo-wrapper {
-    width: 250px;
+    width: 150px;
 }
 
 footer {
@@ -141,13 +141,24 @@ footer {
 
 footer .footer-icon {
     filter: invert(98%) sepia(14%) saturate(362%) hue-rotate(174deg) brightness(93%) contrast(99%);
-    width: 50px;
+    width: 30px;
     cursor: pointer;
     transition: all 0.25s linear;
 }
 
 footer .footer-icon:hover {
     filter: invert(82%) sepia(53%) saturate(6757%) hue-rotate(141deg) brightness(92%) contrast(101%);
+}
+
+@media (min-width: 768px) {
+
+    .footer-logo-wrapper {
+        width: 250px;
+    }
+
+    footer .footer-icon {
+        width: 50px;
+    }
 }
 
 /* main  */
@@ -175,7 +186,7 @@ main .container .row .col {
 .main-content .main-wrapper {
     background: var(--black);
     flex-grow: 1;
-    padding: 30px;
+    padding: 20px 16px;
     border-radius: 20px;
     box-shadow: 5px 5px 8px 3px rgba(26, 26, 26, 0.7);
     display: flex;
@@ -187,12 +198,22 @@ main .container .row .col {
 
 .main-input-wrapper {
     position: relative;
-    width: 75%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 0px;
     gap: 10px;
+}
+
+@media (min-width: 768px) {
+    .main-content .main-wrapper {
+        padding: 20px 10px;
+    }
+
+    .main-input-wrapper {
+        width: 75%;
+    }
 }
 
 @media (min-width: 1080px) {
@@ -250,9 +271,16 @@ main .container .row .col {
 }
 
 .wallet-icon {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     filter: invert(98%) sepia(14%) saturate(362%) hue-rotate(174deg) brightness(93%) contrast(99%);
+}
+
+@media (min-width: 768px) {
+    .wallet-icon {
+        width: 60px;
+        height: 60px;
+    } 
 }
 
 
@@ -287,9 +315,15 @@ main .container .row .col {
     text-align: center;
     border: 1px solid var(--primary);
     border-radius: 999px;
-    padding: 10px 50px;
+    padding: 8px 16px;
     color: var(--primary);
     transition: all 0.5s ease-out;
+}
+
+@media (min-width: 768px) {
+    .main-key-wrapper {
+        padding: 10px 50px;
+    }
 }
 
 .main-key-wrapper_shadow {
