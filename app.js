@@ -29,7 +29,7 @@ fetch("whitelist.json")
     function searchKeyFromAddress (address) {
       const leaf = keccak256(address)
       const proof = tree.getHexProof(leaf)
-      console.log(proof)
+      const temp = "You're key will be available soon!"
       const isValid = tree.verify(proof, leaf, rootHash)
       function copyToNote(text) {
         const tempInput = document.createElement("input");
@@ -75,17 +75,17 @@ fetch("whitelist.json")
             copyButton.classList.add("copy-button");
             copyButton.innerHTML = "<img src='img/copy-icon.svg' alt='Copy' />";
             if (isMobile) {
-              mainKeyWrapper.innerHTML = "<img src='img/key-icon.svg' alt='Copy' />: "
-              keyArea.append(truncateAddress(proof))
+              mainKeyWrapper.innerHTML = "<img src='img/key-icon.svg' alt='Copy' />:"
+              keyArea.append(truncateAddress(temp))
               keyArea.style.color = "white"
             } else {
-              keyArea.append(proof)
+              keyArea.append(temp)
               const copyHover = document.createElement("div");
               copyHover.classList.add("copy-hover");
               copyHover.innerText = "Copy to clipboard";
               copyButton.appendChild(copyHover)
               copyButton.addEventListener("click", () => {
-                const textToCopy = proof;
+                const textToCopy = temp;
                 copyToNote(textToCopy);
                 copyHover.innerText = "Copied!"
       
@@ -93,7 +93,7 @@ fetch("whitelist.json")
                   copyHover.innerText = "Copy to clipboard";
                 }, 1500);
               });
-              mainKeyWrapper.innerHTML = "<img src='img/key-icon.svg' alt='Copy' /> Merble Tree Key: "
+              mainKeyWrapper.innerHTML = "<img src='img/key-icon.svg' alt='Copy' /> Congratulations, you're in WL!"
             }    
             mainKeyWrapper.append(keyArea)
             shadow.classList.remove("active")
