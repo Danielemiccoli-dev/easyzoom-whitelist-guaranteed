@@ -4,6 +4,20 @@ const searchButton = document.getElementById("search-button");
 const mainKeyWrapper = document.querySelector(".main-key-wrapper")
 const shadow = document.querySelector(".main-key-wrapper_shadow")
 
+/* Dan */
+const { MerkleTree } = require('merkletreejs')
+const keccak256 = require('keccak256')
+const whitelist = require('./whitelist.json')
+
+const whiteListLeaves = whitelist.map(addr => keccak256(addr))
+const tree = new MerkleTree(whiteListLeaves, keccak256, {sortPairs: true})
+
+const rootHash = tree.getRoot()
+console.log(rootHash.toString("hex"));
+const claimingAddress = whiteListLeaves[5]; //Minting address
+console.log(claimingAddress)
+//------------------
+
 fetch("users.json")
   .then(response => response.json())
   .then(usersData => {
@@ -18,6 +32,9 @@ fetch("users.json")
       }
     });
     function searchKeyFromAddress (address) {
+      const leaf = keccak256(address)
+      const proof = tree.getHexProof(leaf)
+      const isValid = tree.verify(proof, leaf, root)
       function copyToNote(text) {
         const tempInput = document.createElement("input");
         tempInput.value = text;
@@ -40,7 +57,7 @@ fetch("users.json")
       mainKeyWrapper.style.minHeight = wrapperHeight
       let screenWidth = screen.width
       let isMobile = screenWidth < 768
-      if (users[address]) {
+      if (isValid) {
         mainWrapper.classList.remove("start")
         mainWrapper.classList.remove("error")
         mainWrapper.classList.remove("success")
@@ -72,7 +89,7 @@ fetch("users.json")
               copyHover.innerText = "Copy to clipboard";
               copyButton.appendChild(copyHover)
               copyButton.addEventListener("click", () => {
-                const textToCopy = users[address];
+                const textToCopy = proof;
                 copyToNote(textToCopy);
                 copyHover.innerText = "Copied!"
       
