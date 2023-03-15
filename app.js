@@ -9,20 +9,19 @@ import { MerkleTree } from './merkletreejs.js'
 import keccak256 from './keccak256.js'
 import whitelist from './whitelist.json'
 
-const whiteListLeaves = whitelist.map(addr => keccak256(addr))
-const tree = new MerkleTree(whiteListLeaves, keccak256, {sortPairs: true})
-console.log(window.MerkleTree)
 
-const rootHash = tree.getRoot()
-console.log(rootHash.toString("hex"));
-const claimingAddress = whiteListLeaves[5]; //Minting address
-console.log(claimingAddress)
 //------------------
 
-fetch("users.json")
+fetch("whitelist.json")
   .then(response => response.json())
   .then(usersData => {
-    const users = usersData
+    const whitelist = usersData
+    const whiteListLeaves = whitelist.map(addr => keccak256(addr))
+    const tree = new MerkleTree(whiteListLeaves, keccak256, {sortPairs: true})
+    const rootHash = tree.getRoot()
+    console.log(rootHash.toString("hex"));
+    const claimingAddress = whiteListLeaves[5]; //Minting address
+    console.log(claimingAddress)
     searchButton.addEventListener("click", () => {
       searchKeyFromAddress(input.value)
     });
