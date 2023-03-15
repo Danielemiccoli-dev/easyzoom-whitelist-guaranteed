@@ -5,12 +5,13 @@ const mainKeyWrapper = document.querySelector(".main-key-wrapper")
 const shadow = document.querySelector(".main-key-wrapper_shadow")
 
 /* Dan */
-import MerkleTree from './merkletreejs.js'
+import { MerkleTree } from './merkletreejs.js'
 import keccak256 from './keccak256.js'
-const whitelist = require('./whitelist.json')
+import whitelist from './whitelist.json'
 
 const whiteListLeaves = whitelist.map(addr => keccak256(addr))
 const tree = new MerkleTree(whiteListLeaves, keccak256, {sortPairs: true})
+console.log(window.MerkleTree)
 
 const rootHash = tree.getRoot()
 console.log(rootHash.toString("hex"));
