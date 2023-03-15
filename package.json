@@ -1,8 +1,5 @@
 {
-  "type": "module",
   "dependencies": {
-    "http-server": "^14.1.1",
-    "keccak256": "^1.0.6",
-    "merkletreejs": "^0.2.30"
+    "http-server": "^14.1.1"
   }
 }
