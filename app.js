@@ -7,8 +7,6 @@ const shadow = document.querySelector(".main-key-wrapper_shadow")
 /* Dan */
 import { MerkleTree } from './merkletreejs.js'
 import keccak256 from './keccak256.js'
-import whitelist from './whitelist.json'
-
 
 //------------------
 
