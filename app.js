@@ -5,9 +5,6 @@ const mainKeyWrapper = document.querySelector(".main-key-wrapper")
 const shadow = document.querySelector(".main-key-wrapper_shadow")
 
 /* Dan */
-import { MerkleTree } from './merkletreejs.js'
-import keccak256 from './keccak256.js'
-
 //------------------
 
 fetch("whitelist.json")
@@ -15,7 +12,7 @@ fetch("whitelist.json")
   .then(usersData => {
     const whitelist = usersData
     const whiteListLeaves = whitelist.map(addr => keccak256(addr))
-    const tree = new MerkleTree(whiteListLeaves, keccak256, {sortPairs: true})
+    const tree = new window.MerkleTree(whiteListLeaves, keccak256, {sortPairs: true})
     const rootHash = tree.getRoot()
     console.log(rootHash.toString("hex"));
     const claimingAddress = whiteListLeaves[5]; //Minting address
@@ -32,7 +29,8 @@ fetch("whitelist.json")
     function searchKeyFromAddress (address) {
       const leaf = keccak256(address)
       const proof = tree.getHexProof(leaf)
-      const isValid = tree.verify(proof, leaf, root)
+      console.log(proof)
+      const isValid = tree.verify(proof, leaf, rootHash)
       function copyToNote(text) {
         const tempInput = document.createElement("input");
         tempInput.value = text;
@@ -78,10 +76,10 @@ fetch("whitelist.json")
             copyButton.innerHTML = "<img src='img/copy-icon.svg' alt='Copy' />";
             if (isMobile) {
               mainKeyWrapper.innerHTML = "<img src='img/key-icon.svg' alt='Copy' />: "
-              keyArea.append(truncateAddress(users[address]))
+              keyArea.append(truncateAddress(proof))
               keyArea.style.color = "white"
             } else {
-              keyArea.append(users[address])
+              keyArea.append(proof)
               const copyHover = document.createElement("div");
               copyHover.classList.add("copy-hover");
               copyHover.innerText = "Copy to clipboard";
