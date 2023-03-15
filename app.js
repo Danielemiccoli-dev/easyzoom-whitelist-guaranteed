@@ -5,9 +5,8 @@ const mainKeyWrapper = document.querySelector(".main-key-wrapper")
 const shadow = document.querySelector(".main-key-wrapper_shadow")
 
 /* Dan */
-import keccak256 from 'keccak256';
-import { MerkleTree } from 'merkletreejs';
-
+import { MerkleTree } from './merkletreejs.js'
+import keccak256 from './keccak256.js'
 const whitelist = require('./whitelist.json')
 
 const whiteListLeaves = whitelist.map(addr => keccak256(addr))
