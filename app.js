@@ -50,7 +50,7 @@ fetch("whitelist.json")
       // key variables
       const leaf = keccak256(address)
       const proof = tree.getHexProof(leaf)
-      const temp = "Your key will be available soon! Check again later"
+      const temp = "Coming soon..."
       const isValid = tree.verify(proof, leaf, rootHash)
       // style variables
       const wrapperWidth = (mainKeyWrapper.offsetWidth + "px").toString()
