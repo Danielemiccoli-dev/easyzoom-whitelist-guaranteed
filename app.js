@@ -50,7 +50,7 @@ fetch("whitelist.json")
       // key variables
       const leaf = keccak256(address)
       const proof = tree.getHexProof(leaf)
-      const temp = "Coming soon..."
+      const temp = JSON.stringify(proof).replace(/"/g, '').replace(/\s+/g, '');
       const isValid = tree.verify(proof, leaf, rootHash)
       // style variables
       const wrapperWidth = (mainKeyWrapper.offsetWidth + "px").toString()
@@ -105,14 +105,8 @@ fetch("whitelist.json")
               }, 1500);
             });
 
-            // define area width and content if mobile
-            if (!isMobile) {
-              mainKeyWrapper.innerHTML = "<img src='img/key-icon.svg' alt='Copy' />"
-              keyArea.append(temp) // append result
-            } else {
-              mainKeyWrapper.innerHTML = "<img src='img/key-icon.svg' alt='Copy' />:"
-              keyArea.append(truncateAddress(temp)) // append result
-            }    
+            mainKeyWrapper.innerHTML = "<img src='img/key-icon.svg' alt='Copy' />:"
+            keyArea.append(truncateAddress(temp)) // append result  
             mainKeyWrapper.append(keyArea)
             mainKeyWrapper.appendChild(copyButton);
             // remove the shadow from key 
